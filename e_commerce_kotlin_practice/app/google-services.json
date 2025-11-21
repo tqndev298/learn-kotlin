@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "538417784154",
+    "project_id": "e-commerce-kotlin-practice",
+    "storage_bucket": "e-commerce-kotlin-practice.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538417784154:android:4ac645d540bb717384bf63",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_kotlin_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtwVzAqkaITfVROLhzVI66mkPg9I0qXlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
