@@ -1,11 +1,15 @@
 package com.example.e_commerce_kotlin_practice.adapters
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.e_commerce_kotlin_practice.databinding.ViewholderBrandBinding
 import com.example.e_commerce_kotlin_practice.model.BrandModel
+import com.example.e_commerce_kotlin_practice.R
+
 
 class BrandsAdapter(private val items: MutableList<BrandModel>) :
     RecyclerView.Adapter<BrandsAdapter.Viewholder>() {
@@ -46,11 +50,17 @@ class BrandsAdapter(private val items: MutableList<BrandModel>) :
         val isSelected = selectedPosition == position
 
         holder.binding.pic.setBackgroundResource(
-            if(isSelected){
-                R.drawable
-            }else{
-
+            if (isSelected) {
+                R.drawable.blue_bg
+            } else {
+                R.drawable.grey_bg
             }
+        )
+
+        ImageViewCompat.setImageTintList(
+            holder.binding.pic,
+            ColorStateList.valueOf(holder.itemView.context.getColor(if (isSelected) R.color.white else R.color.black))
+
         )
     }
 

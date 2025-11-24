@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "538417784154",
+    "firebase_url": "https://e-commerce-kotlin-practice-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "e-commerce-kotlin-practice",
     "storage_bucket": "e-commerce-kotlin-practice.firebasestorage.app"
   },

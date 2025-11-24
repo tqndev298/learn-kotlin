@@ -1,8 +1,11 @@
 package com.example.e_commerce_kotlin_practice.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.e_commerce_kotlin_practice.model.BrandModel
+import com.example.e_commerce_kotlin_practice.model.ItemModel
+import com.example.e_commerce_kotlin_practice.model.SliderModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -14,7 +17,15 @@ class MainRepository {
 
     private val _brands = MutableLiveData<MutableList<BrandModel>>()
 
+    private val _sliders = MutableLiveData<MutableList<SliderModel>>()
+
+    private val _popular = MutableLiveData<MutableList<ItemModel>>()
+
     val brands: LiveData<MutableList<BrandModel>> get() = _brands
+
+    val sliders: LiveData<MutableList<SliderModel>> get() = _sliders
+
+    val popular: LiveData<MutableList<ItemModel>> get() = _popular
 
     fun loadBrands() {
         val ref = firebaseDatabase.getReference("Category")
@@ -31,6 +42,49 @@ class MainRepository {
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
+                Log.e("FB", "Firebase error: ${error.message}")
+            }
+        })
+    }
+
+
+    fun loadSliders() {
+        val ref = firebaseDatabase.getReference("Banner")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = mutableListOf<SliderModel>()
+                for (child in snapshot.children) {
+                    val sliderModel = child.getValue(SliderModel::class.java)?.let {
+                        list.add(it)
+                    }
+                }
+                _sliders.value = list
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+                Log.e("FB", "Firebase error: ${error.message}")
+            }
+        })
+    }
+
+
+    fun loadPopular() {
+        val ref = firebaseDatabase.getReference("Items")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = mutableListOf<ItemModel>()
+                for (child in snapshot.children) {
+                    val itemModel = child.getValue(ItemModel::class.java)?.let {
+                        list.add(it)
+                    }
+                }
+                _popular.value = list
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+                Log.e("FB", "Firebase error: ${error.message}")
             }
         })
     }
