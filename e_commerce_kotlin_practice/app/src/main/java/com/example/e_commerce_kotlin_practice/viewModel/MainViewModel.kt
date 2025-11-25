@@ -3,7 +3,7 @@ package com.example.e_commerce_kotlin_practice.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.e_commerce_kotlin_practice.model.BrandModel
-import com.example.e_commerce_kotlin_practice.model.ItemModel
+import com.example.e_commerce_kotlin_practice.model.ItemsModel
 import com.example.e_commerce_kotlin_practice.model.SliderModel
 import com.example.e_commerce_kotlin_practice.repository.MainRepository
 
@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
 
     val sliders: LiveData<MutableList<SliderModel>> = repository.sliders
 
-    val popular: LiveData<MutableList<ItemModel>> = repository.popular
+    val popular: LiveData<MutableList<ItemsModel>> = repository.popular
 
 
     fun loadBrands() = repository.loadBrands()

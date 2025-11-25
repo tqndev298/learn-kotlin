@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
-import com.example.e_commerce_kotlin_practice.R
 import com.example.e_commerce_kotlin_practice.adapters.BrandsAdapter
+import com.example.e_commerce_kotlin_practice.adapters.PopularAdapter
 import com.example.e_commerce_kotlin_practice.adapters.SliderAdapter
 import com.example.e_commerce_kotlin_practice.databinding.ActivityMainBinding
 import com.example.e_commerce_kotlin_practice.model.SliderModel
@@ -28,6 +26,9 @@ class DashboardActivity : AppCompatActivity() {
     private val brandsAdapter = BrandsAdapter(mutableListOf())
 
 
+    private val popularAdapter = PopularAdapter(mutableListOf())
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,6 +41,23 @@ class DashboardActivity : AppCompatActivity() {
     private fun initUI() {
         initBrands()
         initBanners()
+        initPopulars()
+    }
+
+    private fun initPopulars() {
+        binding.apply {
+            recyclerViewPopular.layoutManager = LinearLayoutManager(this@DashboardActivity)
+            recyclerViewPopular.adapter = popularAdapter
+            progressBarPopular.visibility = View.VISIBLE
+            viewModel.popular.observe(this@DashboardActivity) { data ->
+                popularAdapter.updateData(data)
+                progressBarPopular.visibility = View.GONE
+
+
+            }
+
+            viewModel.loadPopular()
+        }
     }
 
     private fun initBrands() {
@@ -63,14 +81,14 @@ class DashboardActivity : AppCompatActivity() {
         binding.apply {
             progressBarBanners.visibility = View.VISIBLE
             viewModel.sliders.observe(this@DashboardActivity) { data ->
-                SetupBanners(data)
+                setupBanners(data)
                 progressBarBanners.visibility = View.GONE
             }
             viewModel.loadSliders()
         }
     }
 
-    private fun SetupBanners(image: MutableList<SliderModel>) {
+    private fun setupBanners(image: MutableList<SliderModel>) {
         binding.viewpagerSlider.apply {
             adapter = SliderAdapter(image, viewPager2 = this)
             clipToPadding = false
