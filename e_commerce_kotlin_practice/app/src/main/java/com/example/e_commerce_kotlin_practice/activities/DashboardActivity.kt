@@ -1,5 +1,6 @@
 package com.example.e_commerce_kotlin_practice.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -42,6 +43,13 @@ class DashboardActivity : AppCompatActivity() {
         initBrands()
         initBanners()
         initPopulars()
+        initBottomNavigation()
+    }
+
+    private fun initBottomNavigation() {
+        binding.cartBtn.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
     }
 
     private fun initPopulars() {
