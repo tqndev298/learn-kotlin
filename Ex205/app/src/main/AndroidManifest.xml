@@ -13,7 +13,10 @@
         android:theme="@style/Theme.Ex205">
         <activity
             android:name=".ColorPickerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_activity_color_picker"
+            android:theme="@style/Theme.Ex205"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true"
